@@ -23,6 +23,16 @@ const Register = () => {
     console.log(selectedPackage);
   }, [selectedPackage]);
 
+  useEffect(() => {
+    if (selectedPackageState) {
+      setFormData((prevFormData) => ({
+        ...prevFormData,
+        package: selectedPackageState,
+      }));
+    }
+    console.log(formData);
+  }, [selectedPackageState]);
+
   const packages = [
     {
       label: "Puja Patron - $1500",
