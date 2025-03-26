@@ -17,6 +17,10 @@ const Register = () => {
 
   const [selectedPackage, setSelectedPackage] = useState(selectedPackageState);
 
+  const [multiChecked, setMultiChecked] = useState(false);
+  const [singleChecked, setSingleChecked] = useState(false);
+  const [loading, setLoading] = useState(false);
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -77,6 +81,7 @@ const Register = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
 
     if (!formData.name || !formData.email || !formData.phone || !formData.package) {
       alert("Please fill out all fields.");
@@ -89,7 +94,7 @@ const Register = () => {
       return;
     }
 
-    await setDoc(doc(db, "registrations", formData.email), { formData, paid: false });
+    await setDoc(doc(db, "registrations", formData.email), { formData, paid: false, multiChecked, singleChecked });
 
     const price = getPrice(selectedPkg.label);
 
@@ -104,6 +109,7 @@ const Register = () => {
     const zelleLink = `https://enroll.zellepay.com/qr-codes?data=${encoded}`;
 
     window.open(zelleLink, "_blank");
+    setLoading(false);
   };
 
   const handleChange = (e) => {
@@ -174,6 +180,34 @@ const Register = () => {
               </option>
             ))}
           </select>
+          <div className="flex flex-col gap-3">
+            <div className='flex flex-row gap-3 items-start'>
+              <input
+                type='checkbox'
+                value={"singlepay"}
+                className='mt-2'
+                onChange={() => {
+                  setSingleChecked(!singleChecked);
+                  setMultiChecked(false);
+                }}
+                disabled={multiChecked}
+              />
+              <label className="text-white">I'm in! I'll pay today to lock in my early bird discount. Early bird discount expires 8/15</label>
+            </div>
+            <div className='flex flex-row gap-3 items-start'>
+              <input
+                type='checkbox'
+                value={"multipay"}
+                className='mt-2'
+                onChange={() => {
+                  setMultiChecked(!multiChecked);
+                  setSingleChecked(false);
+                }}
+                disabled={singleChecked}
+              />
+              <label className="text-white">I'm in! I'll pledge $100 today and take advantage of early bird pricing by paying the balance by 8/15</label>
+            </div>
+          </div>
           <button
             type="submit"
             className="w-full p-4 bg-red-500 hover:bg-red-600 rounded-lg text-white font-bold text-lg shadow-lg transform transition duration-300 hover:scale-105"
@@ -184,6 +218,7 @@ const Register = () => {
           <button
             className="w-full p-4 bg-red-500 hover:bg-red-600 rounded-lg text-white font-bold text-lg shadow-lg transform transition duration-300 hover:scale-105"
             onClick={() => { navigate("/") }}
+            disabled={loading}
           >
             Back To Packages
           </button>

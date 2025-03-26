@@ -38,6 +38,7 @@ export default function RegistrationPage() {
     {
       label: "Puja Membership - Single $300 / Family $500",
       value: "membership",
+      subTitle: "Early Bird Pricing Avaliable.",
       benefits: [
         "Durga Puja - All Meals",
         "Kali Puja - All Meals",
