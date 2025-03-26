@@ -121,7 +121,7 @@ const TiltCard = ({ packageData }) => {
                   className={`flex items-center space-x-2 text-gray-300`}
                 >
                   <span className="text-xl">
-                    {isIncluded ? "✔" : "❌"}
+                    {isIncluded ? "✅" : "❌"}
                   </span>
                   <span>{benefit}</span>
                 </li>
@@ -133,7 +133,7 @@ const TiltCard = ({ packageData }) => {
                   className={`flex items-center space-x-2 text-gray-300`}
                 >
                   <span className="text-xl">
-                    {isIncluded ? "✔" : "❌"}
+                    {isIncluded ? "✅" : "❌"}
                   </span>
                   <span>{benefit}</span>
                 </li>
