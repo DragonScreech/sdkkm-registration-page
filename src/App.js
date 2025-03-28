@@ -59,12 +59,12 @@ export default function RegistrationPage() {
         "Exclusive Food Line & Seating for Seniors",
       ],
     },
-    {
-      label: "Day Pass",
-      subTitle: "A One Day Pass is available only for those whose current financial circumstances might prevent them from registering through our regular membership tiers. If this applies to you, please contact us at sdkkm.pujo.houston@gmail.com and we’ll happily work with you to ensure you can still be part of the celebration.",
-      value: "daypass",
-      benefits: ["Access to Durga Puja with one Meal"],
-    },
+    // {
+    //   label: "Day Pass",
+    //   subTitle: "A One Day Pass is available only for those whose current financial circumstances might prevent them from registering through our regular membership tiers. If this applies to you, please contact us at sdkkm.pujo.houston@gmail.com and we’ll happily work with you to ensure you can still be part of the celebration.",
+    //   value: "daypass",
+    //   benefits: ["Access to Durga Puja with one Meal"],
+    // },
   ];
 
   return (
