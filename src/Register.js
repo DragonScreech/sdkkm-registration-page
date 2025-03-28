@@ -94,7 +94,7 @@ const Register = () => {
       return;
     }
 
-    await setDoc(doc(db, "registrations", formData.email), { formData, paid: false, multiChecked, singleChecked });
+    await setDoc(doc(db, "registrations", formData.name), { formData, paid: false, multiChecked, singleChecked });
 
     const price = getPrice(selectedPkg.label);
 
