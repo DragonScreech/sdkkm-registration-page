@@ -83,7 +83,8 @@ const Register = () => {
     e.preventDefault();
     setLoading(true);
 
-    if (!formData.name || !formData.email || !formData.phone || !formData.package) {
+    if (!formData.name || !formData.email || !formData.phone || !formData.package || !multiChecked && !singleChecked) {
+      setLoading(false);
       alert("Please fill out all fields.");
       return;
     }
