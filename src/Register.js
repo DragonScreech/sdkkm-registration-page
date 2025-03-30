@@ -221,7 +221,7 @@ const Register = () => {
             onClick={() => { navigate("/") }}
             disabled={loading}
           >
-            Back To Packages
+            Back To Packages and Donations
           </button>
         </form>
       </div>

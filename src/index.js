@@ -5,6 +5,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter, Routes, Route } from 'react-router';
 import Register from './Register';
+import Donations from './Donations';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -13,6 +14,7 @@ root.render(
       <Routes>
         <Route path="/" element={<App />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/donations" element={<Donations />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>

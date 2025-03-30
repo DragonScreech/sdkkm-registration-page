@@ -59,6 +59,27 @@ export default function RegistrationPage() {
         "Exclusive Food Line & Seating for Seniors",
       ],
     },
+    {
+      label: "Puja Donation",
+      value: "donation",
+      subTitle: `Durga Puja and Kali Puja are not just festivals—they are vibrant expressions of our devotion, our heritage, and our collective soul as a Bengali community.
+
+Each garland, each small offering, every saree that adorns our beloved Ma Durga and Ma Kali is more than a ritual—it is a gift of love from you, the devotee.
+
+As we prepare for this year’s celebrations, we invite you to be a part of something deeply spiritual and unforgettable.Sponsor a sacred element of the Puja and offer it in your name or in honor of a loved one.Your support helps bring the Puja to life, and your name will be remembered among those who made this divine celebration possible.
+
+Why Donate?
+
+Because faith lives through action.
+
+Because our children deserve to witness the beauty of our traditions.
+
+Because every offering is a prayer answered.
+
+Step into this sacred moment.Let your heart lead the way.
+
+Sponsor today.Offer with devotion.Celebrate with pride.`
+    }
     // {
     //   label: "Day Pass",
     //   subTitle: "A One Day Pass is available only for those whose current financial circumstances might prevent them from registering through our regular membership tiers. If this applies to you, please contact us at sdkkm.pujo.houston@gmail.com and we’ll happily work with you to ensure you can still be part of the celebration.",
@@ -114,7 +135,7 @@ const TiltCard = ({ packageData }) => {
             if (included.has(benefit)) {
               isIncluded = true
             }
-            if (benefit !== "Access to Durga Puja with one Meal" && packageData.value !== "daypass") {
+            if (packageData.value !== 'donation' && benefit !== "Access to Durga Puja with one Meal" && packageData.value !== "daypass") {
               return (
                 <li
                   key={i}
@@ -126,7 +147,7 @@ const TiltCard = ({ packageData }) => {
                   <span>{benefit}</span>
                 </li>
               );
-            } else if (benefit === "Access to Durga Puja with one Meal" && packageData.value === "daypass") {
+            } else if (packageData.value !== 'donation' && benefit === "Access to Durga Puja with one Meal" && packageData.value === "daypass") {
               return (
                 <li
                   key={i}
@@ -138,7 +159,7 @@ const TiltCard = ({ packageData }) => {
                   <span>{benefit}</span>
                 </li>
               );
-            } else if (packageData.value === "daypass" && benefit !== "Access to Durga Puja with one Meal") {
+            } else if (packageData.value !== 'donation' && packageData.value === "daypass" && benefit !== "Access to Durga Puja with one Meal") {
               return (
                 <li
                   key={i}
@@ -155,11 +176,16 @@ const TiltCard = ({ packageData }) => {
         </ul>
       </div>
 
-      {packageData.value !== "daypass" && <button
+      {packageData.value !== "daypass" && packageData.value != 'donation' ? <button
         className="w-full p-4 bg-red-500 hover:bg-red-600 rounded-lg text-white font-bold text-lg shadow-lg transform transition duration-300 hover:scale-105"
         onClick={() => { navigate("/register", { state: { selectedPackageState: packageData.value } }) }}
       >
         Register Now
+      </button> : <button
+        className="w-full p-4 bg-red-500 hover:bg-red-600 rounded-lg text-white font-bold text-lg shadow-lg transform transition duration-300 hover:scale-105"
+        onClick={() => { navigate("/donations", { state: { selectedPackageState: packageData.value } }) }}
+      >
+        Donate Now
       </button>}
     </motion.div>
   );
