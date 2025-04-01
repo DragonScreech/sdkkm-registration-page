@@ -88,6 +88,20 @@ Sponsor today.Offer with devotion.Celebrate with pride.`
     // },
   ];
 
+  const handleClickPay = () => {
+    const payload = {
+      name: "SDKKM Puja Registration",
+      action: "payment",
+      token: "sdkkm.pujo.houston@gmail.com",
+      amount: "500", // or dynamic
+    };
+
+    const encoded = btoa(JSON.stringify(payload));
+    const zelleLink = `https://enroll.zellepay.com/qr-codes?data=${encoded}`;
+
+    window.open(zelleLink, "_blank");
+  }
+
   return (
     <div className="min-h-screen bg-gray-800 relative text-white p-6 flex flex-col items-center">
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,_red,_transparent)] opacity-40"></div>
@@ -102,6 +116,13 @@ Sponsor today.Offer with devotion.Celebrate with pride.`
           <TiltCard key={pkg.value} packageData={pkg} />
         ))}
       </div>
+      <p className="p-5">Already pledged an amount? Pay the rest of the balance here:</p>
+      <button
+        onClick={handleClickPay}
+        className="p-4 bg-red-500 hover:bg-red-600 rounded-lg text-white font-bold text-lg shadow-lg transform transition duration-300 hover:scale-105"
+      >
+        Pay with Zelle
+      </button>
     </div>
   );
 }
@@ -175,7 +196,6 @@ const TiltCard = ({ packageData }) => {
           })}
         </ul>
       </div>
-
       {packageData.value !== "daypass" && packageData.value != 'donation' ? <button
         className="w-full p-4 bg-red-500 hover:bg-red-600 rounded-lg text-white font-bold text-lg shadow-lg transform transition duration-300 hover:scale-105"
         onClick={() => { navigate("/register", { state: { selectedPackageState: packageData.value } }) }}
