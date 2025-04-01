@@ -10,6 +10,7 @@ const Register = () => {
     email: "",
     phone: "",
     package: "",
+    numberOfPeople: "",
   });
 
   const location = useLocation();
@@ -83,7 +84,7 @@ const Register = () => {
     e.preventDefault();
     setLoading(true);
 
-    if (!formData.name || !formData.email || !formData.phone || !formData.package || !multiChecked && !singleChecked) {
+    if (!formData.name || !formData.email || !formData.phone || !formData.package || !multiChecked && !singleChecked || !formData.numberOfPeople) {
       setLoading(false);
       alert("Please fill out all fields.");
       return;
@@ -94,10 +95,11 @@ const Register = () => {
       alert("Please select a package.");
       return;
     }
-
-    await setDoc(doc(db, "registrations", formData.name), { formData, paid: false, multiChecked, singleChecked });
-
     const price = getPrice(selectedPkg.label);
+
+    await setDoc(doc(db, "registrations", formData.name), { formData, paid: false, multiChecked, singleChecked, amountOutstanding: price, amountPaid: 0, date: new Date() });
+
+
 
     const payload = {
       name: "SDKKM Puja Registration",
@@ -120,15 +122,17 @@ const Register = () => {
     }
   };
 
-
-
-  // Helper function to get the price based on label
+  // Helper function to get the price based on label and number of people
   const getPrice = (label) => {
-    if (label.includes("Patron")) return 1500;
-    if (label.includes("Membership")) return 500;
-    if (label.includes("Package")) return 300;
-    if (label.includes("Day Pass")) return 150;
-    return 0;
+    if (label === "Puja Patron - $1500") {
+      return 1500;
+    }
+    if (label === "Puja Membership - Single $300 / Family $500") {
+      return formData.numberOfPeople === "single" ? 300 : 500;
+    }
+    if (label === "Puja Package - Single $200 / Family $300") {
+      return formData.numberOfPeople === "single" ? 200 : 300;
+    }
   };
 
   return (
@@ -180,6 +184,19 @@ const Register = () => {
                 {pkg.label}
               </option>
             ))}
+          </select>
+          <select
+            name="numberOfPeople"
+            value={formData.numberOfPeople}
+            onChange={handleChange}
+            required
+            className="w-full p-4 bg-black/40 border border-red-500 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-400"
+          >
+            <option value="" disabled>
+              Select Number of People
+            </option>
+            <option value="single">Single</option>
+            <option value="family">Family</option>
           </select>
           <div className="flex flex-col gap-3">
             <div className='flex flex-row gap-3 items-start'>
