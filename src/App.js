@@ -59,27 +59,27 @@ export default function RegistrationPage() {
         "Exclusive Food Line & Seating for Seniors",
       ],
     },
-    {
-      label: "Puja Donation",
-      value: "donation",
-      subTitle: `Durga Puja and Kali Puja are not just festivals—they are vibrant expressions of our devotion, our heritage, and our collective soul as a Bengali community.
+    //     {
+    //       label: "Puja Donation",
+    //       value: "donation",
+    //       subTitle: `Durga Puja and Kali Puja are not just festivals—they are vibrant expressions of our devotion, our heritage, and our collective soul as a Bengali community.
 
-Each garland, each small offering, every saree that adorns our beloved Ma Durga and Ma Kali is more than a ritual—it is a gift of love from you, the devotee.
+    // Each garland, each small offering, every saree that adorns our beloved Ma Durga and Ma Kali is more than a ritual—it is a gift of love from you, the devotee.
 
-As we prepare for this year’s celebrations, we invite you to be a part of something deeply spiritual and unforgettable.Sponsor a sacred element of the Puja and offer it in your name or in honor of a loved one.Your support helps bring the Puja to life, and your name will be remembered among those who made this divine celebration possible.
+    // As we prepare for this year’s celebrations, we invite you to be a part of something deeply spiritual and unforgettable.Sponsor a sacred element of the Puja and offer it in your name or in honor of a loved one.Your support helps bring the Puja to life, and your name will be remembered among those who made this divine celebration possible.
 
-Why Donate?
+    // Why Donate?
 
-Because faith lives through action.
+    // Because faith lives through action.
 
-Because our children deserve to witness the beauty of our traditions.
+    // Because our children deserve to witness the beauty of our traditions.
 
-Because every offering is a prayer answered.
+    // Because every offering is a prayer answered.
 
-Step into this sacred moment.Let your heart lead the way.
+    // Step into this sacred moment.Let your heart lead the way.
 
-Sponsor today.Offer with devotion.Celebrate with pride.`
-    }
+    // Sponsor today.Offer with devotion.Celebrate with pride.`
+    //     }
     // {
     //   label: "Day Pass",
     //   subTitle: "A One Day Pass is available only for those whose current financial circumstances might prevent them from registering through our regular membership tiers. If this applies to you, please contact us at sdkkm.pujo.houston@gmail.com and we’ll happily work with you to ensure you can still be part of the celebration.",
@@ -87,20 +87,6 @@ Sponsor today.Offer with devotion.Celebrate with pride.`
     //   benefits: ["Access to Durga Puja with one Meal"],
     // },
   ];
-
-  const handleClickPay = () => {
-    const payload = {
-      name: "SDKKM Puja Registration",
-      action: "payment",
-      token: "sdkkm.pujo.houston@gmail.com",
-      amount: "500", // or dynamic
-    };
-
-    const encoded = btoa(JSON.stringify(payload));
-    const zelleLink = `https://enroll.zellepay.com/qr-codes?data=${encoded}`;
-
-    window.open(zelleLink, "_blank");
-  }
 
   return (
     <div className="min-h-screen bg-gray-800 relative text-white p-6 flex flex-col items-center">
@@ -116,13 +102,6 @@ Sponsor today.Offer with devotion.Celebrate with pride.`
           <TiltCard key={pkg.value} packageData={pkg} />
         ))}
       </div>
-      <p className="p-5">Already pledged an amount? Pay the rest of the balance here:</p>
-      <button
-        onClick={handleClickPay}
-        className="p-4 bg-red-500 hover:bg-red-600 rounded-lg text-white font-bold text-lg shadow-lg transform transition duration-300 hover:scale-105"
-      >
-        Pay with Zelle
-      </button>
     </div>
   );
 }
@@ -133,6 +112,20 @@ const TiltCard = ({ packageData }) => {
   const included = new Set(packageData.benefits);
 
   const navigate = useNavigate()
+
+  const handleClickPay = () => {
+    const payload = {
+      name: "SDKKM Puja Registration",
+      action: "payment",
+      token: "sdkkm.pujo.houston@gmail.com",
+      amount: "500", // or dynamic
+    };
+
+    const encoded = btoa(JSON.stringify(payload));
+    const zelleLink = `https://enroll.zellepay.com/qr-codes?data=${encoded}`;
+
+    window.open(zelleLink, "_blank");
+  }
 
   return (
     <motion.div
@@ -207,6 +200,13 @@ const TiltCard = ({ packageData }) => {
       >
         Donate Now
       </button>}
+      <p className="p-5">Already pledged $100? Pay your remaining balance here:</p>
+      <button
+        onClick={handleClickPay}
+        className="p-4 bg-red-500 hover:bg-red-600 rounded-lg text-white font-bold text-lg shadow-lg transform transition duration-300 hover:scale-105"
+      >
+        Pay with Zelle
+      </button>
     </motion.div>
   );
 };
