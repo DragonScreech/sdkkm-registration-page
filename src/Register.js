@@ -84,7 +84,7 @@ const Register = () => {
     e.preventDefault();
     setLoading(true);
 
-    if (!formData.name || !formData.email || !formData.phone || !formData.package || !multiChecked && !singleChecked || !formData.numberOfPeople) {
+    if (!formData.name || !formData.email || !formData.phone || !formData.package || selectedPackage !== "patron" && !multiChecked && !singleChecked || !formData.numberOfPeople) {
       setLoading(false);
       alert("Please fill out all fields.");
       return;
@@ -97,9 +97,12 @@ const Register = () => {
     }
     const price = getPrice(selectedPkg.label);
 
-    await setDoc(doc(db, "registrations", formData.name), { formData, paid: false, multiChecked, singleChecked, amountOutstanding: price, amountPaid: 0, date: new Date() });
-
-
+    if (selectedPackage === "patron") {
+      await setDoc(doc(db, "registrations", formData.name), { formData, paid: false, singleChecked: true, amountOutstanding: price, amountPaid: 0, date: new Date() });
+    }
+    else {
+      await setDoc(doc(db, "registrations", formData.name), { formData, paid: false, singleChecked: singleChecked, multiChecked: multiChecked, amountOutstanding: price, amountPaid: 0, date: new Date() });
+    }
 
     const payload = {
       name: "SDKKM Puja Registration",
@@ -198,7 +201,7 @@ const Register = () => {
             <option value="single">Single</option>
             <option value="family">Family</option>
           </select>
-          <div className="flex flex-col gap-3">
+          {selectedPackage !== "patron" && <div className="flex flex-col gap-3">
             <div className='flex flex-row gap-3 items-start'>
               <input
                 type='checkbox'
@@ -210,7 +213,7 @@ const Register = () => {
                 }}
                 disabled={multiChecked}
               />
-              <label className="text-white">I'm in! I'll pay today to lock in my early bird discount. Early bird discount expires 8/15</label>
+              <label className="text-white">{selectedPackage !== "package" ? "I'm in! I'll pay today to lock in my early bird discount. Early bird discount expires 8/15" : "I'm in! I'll pay today"}</label>
             </div>
             <div className='flex flex-row gap-3 items-start'>
               <input
@@ -223,9 +226,9 @@ const Register = () => {
                 }}
                 disabled={singleChecked}
               />
-              <label className="text-white">I'm in! I'll pledge $100 today and take advantage of early bird pricing by paying the balance by 8/15</label>
+              <label className="text-white">{selectedPackage !== "package" ? "I'm in! I'll pledge $100 today and take advantage of early bird pricing by paying the balance by 8/15" : "I'm in! I'll pledge $100 today and pay the remaining balance by 9/15/25"}</label>
             </div>
-          </div>
+          </div>}
           <button
             type="submit"
             className="w-full p-4 bg-red-500 hover:bg-red-600 rounded-lg text-white font-bold text-lg shadow-lg transform transition duration-300 hover:scale-105"

@@ -6,6 +6,7 @@ import reportWebVitals from './reportWebVitals';
 import { BrowserRouter, Routes, Route } from 'react-router';
 import Register from './Register';
 import Donations from './Donations';
+import RegistrationPage from './RegistrationCards';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -13,6 +14,7 @@ root.render(
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<App />} />
+        <Route path="/cards" element={<RegistrationPage />} />
         <Route path="/register" element={<Register />} />
         <Route path="/donations" element={<Donations />} />
       </Routes>
