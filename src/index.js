@@ -7,6 +7,7 @@ import { BrowserRouter, Routes, Route } from 'react-router';
 import Register from './Register';
 import Donations from './Donations';
 import RegistrationPage from './RegistrationCards';
+import DonationForm from './DonationForm';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -17,6 +18,7 @@ root.render(
         <Route path="/cards" element={<RegistrationPage />} />
         <Route path="/register" element={<Register />} />
         <Route path="/donations" element={<Donations />} />
+        <Route path="/donationForm" element={<DonationForm></DonationForm>} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>
