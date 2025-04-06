@@ -7,7 +7,7 @@ const Donations = () => {
   const [donationItems, setDonationItems] = useState([
     { name: "Garlands for Durga Puja", price: 200, slots: 5, sponsors: [] },
     { name: "Flowers for Durga Puja", price: 100, slots: 5, sponsors: [] },
-    { name: "Sweets for Durga Puja bhog each time", price: 100, slots: 5, sponsors: [] },
+    { name: "Sweets for Durga Puja bhog", price: 100, slots: 5, sponsors: [] },
     { name: "Saree for Durga Puja", price: 100, slots: 4, sponsors: [] },
     { name: "Dhoti for Durga Puja", price: 100, slots: 2, sponsors: [] },
     { name: "Fruits for Durga Puja", price: 100, slots: 5, sponsors: [] },
@@ -53,7 +53,7 @@ const Donations = () => {
       <div className="flex flex-row justify-center gap-3 items-center mb-12">
         <img src="https://sdkkm.org/wp-content/uploads/2023/03/output-onlinepngtools-2.png?w=600" alt="SDKKM Logo" className="w-24 h-24" />
         <h1 className="text-5xl font-extrabold text-center text-white drop-shadow-lg relative z-10">
-          Durga Puja 2025 Registration
+          Durga Puja 2025 Donation
         </h1>
       </div>
       <div className="flex flex-col gap-12 items-center">
@@ -87,7 +87,7 @@ const ItemCard = ({ donationData }) => {
           className="mt-4 space-y-2 relative z-10 mb-4"
           style={{ transform: "translateZ(75px)" }}
         >
-          {donationData.sponsors.length > 0 ? (
+          {donationData.sponsors.length > 0 && (
             donationData.sponsors.map((sponsorName) => (
               <li
                 key={sponsorName}
@@ -97,8 +97,6 @@ const ItemCard = ({ donationData }) => {
                 <span>{sponsorName}</span>
               </li>
             ))
-          ) : (
-            <li className="text-gray-300 italic text-xl">No sponsors yet</li>
           )}
         </ul>
       </div>
