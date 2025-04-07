@@ -84,10 +84,14 @@ const Register = () => {
     e.preventDefault();
     setLoading(true);
 
-    if (!formData.name || !formData.email || !formData.phone || !formData.package || selectedPackage !== "patron" && !multiChecked && !singleChecked || !formData.numberOfPeople) {
+    if (!formData.name || !formData.phone || !formData.package || selectedPackage !== "patron" && !multiChecked && !singleChecked || !formData.numberOfPeople) {
       setLoading(false);
       alert("Please fill out all fields.");
       return;
+    }
+
+    if (formData.email == "") {
+      formData.email = null;
     }
 
     const selectedPkg = packages.find((pkg) => pkg.value === formData.package);
@@ -157,10 +161,9 @@ const Register = () => {
           <input
             name="email"
             type="email"
-            placeholder="Email"
+            placeholder="Email (optional)"
             value={formData.email}
             onChange={handleChange}
-            required
             className="w-full p-4 bg-black/40 border border-red-500 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-400"
           />
           <input
@@ -213,7 +216,7 @@ const Register = () => {
                 }}
                 disabled={multiChecked}
               />
-              <label className="text-white">{selectedPackage !== "package" ? "I'm in! I'll pay today to lock in my early bird discount. Early bird discount expires 8/15" : "I'm in! I'll pay today"}</label>
+              <label className="text-white">{selectedPackage !== "package" ? "I'm in! I'll pay today to lock in my early bird discount of $50 off. Early bird discount expires 8/15" : "I'm in! I'll pay today"}</label>
             </div>
             <div className='flex flex-row gap-3 items-start'>
               <input
@@ -226,7 +229,7 @@ const Register = () => {
                 }}
                 disabled={singleChecked}
               />
-              <label className="text-white">{selectedPackage !== "package" ? "I'm in! I'll pledge $100 today and take advantage of early bird pricing by paying the balance by 8/15" : "I'm in! I'll pledge $100 today and pay the remaining balance by 9/15/25"}</label>
+              <label className="text-white">{selectedPackage !== "package" ? "I'm in! I'll pledge $100 today and take advantage of early bird pricing ($50 off) by paying the balance by 8/15" : "I'm in! I'll pledge $100 today and pay the remaining balance by 9/15/25"}</label>
             </div>
           </div>}
           <button
