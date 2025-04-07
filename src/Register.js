@@ -149,6 +149,7 @@ const Register = () => {
         <h2 className="text-3xl font-bold text-center text-white mb-6">
           Register Now
         </h2>
+        <p className=' italic text-gray-300 mb-6'>We respect your privacy. Your email and phone number will never be shared with third parties.</p>
         <form onSubmit={handleSubmit} className="space-y-6">
           <input
             name="name"
@@ -166,6 +167,7 @@ const Register = () => {
             onChange={handleChange}
             className="w-full p-4 bg-black/40 border border-red-500 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-400"
           />
+          <p className=' italic text-gray-300'>We request your email so we can send you puja updates and a tax-deductible donation receipt.</p>
           <input
             name="phone"
             type="tel"
