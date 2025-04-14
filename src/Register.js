@@ -241,6 +241,7 @@ const Register = () => {
           >
             Register Now
           </button>
+          <p className='text-center'>Kindly send your donation via Zelle to: sdkkm.pujo.houston@gmail.com</p>
           <button
             className="w-full p-4 bg-red-500 hover:bg-red-600 rounded-lg text-white font-bold text-lg shadow-lg transform transition duration-300 hover:scale-105"
             onClick={() => { navigate("/") }}
