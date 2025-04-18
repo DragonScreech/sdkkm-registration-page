@@ -200,13 +200,13 @@ const TiltCard = ({ packageData }) => {
       >
         Donate Now
       </button>}
-      {packageData.value !== "patron" && <div><p className="p-5">Already pledged $100? Pay your remaining balance here:</p>
+      {/* {packageData.value !== "patron" && <div><p className="p-5">Already pledged $100? Pay your remaining balance here:</p>
         <button
           onClick={handleClickPay}
           className="p-4 bg-red-500 hover:bg-red-600 rounded-lg text-white font-bold text-lg shadow-lg transform transition duration-300 hover:scale-105 w-full"
         >
           Pay with Zelle
-        </button></div>}
+        </button></div>} */}
     </motion.div>
   );
 };
