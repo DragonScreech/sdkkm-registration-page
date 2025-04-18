@@ -21,6 +21,7 @@ const Register = () => {
   const [multiChecked, setMultiChecked] = useState(false);
   const [singleChecked, setSingleChecked] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [registered, setRegistered] = useState(false);
 
   const navigate = useNavigate();
 
@@ -82,6 +83,7 @@ const Register = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setRegistered(true);
     setLoading(true);
 
     if (!formData.name || !formData.phone || !formData.package || selectedPackage !== "patron" && !multiChecked && !singleChecked || !formData.numberOfPeople) {
@@ -118,7 +120,7 @@ const Register = () => {
     const encoded = btoa(JSON.stringify(payload));
     const zelleLink = `https://enroll.zellepay.com/qr-codes?data=${encoded}`;
 
-    window.open(zelleLink, "_blank");
+    // window.open(zelleLink, "_blank");
     setLoading(false);
   };
 
@@ -236,12 +238,13 @@ const Register = () => {
           </div>}
           <button
             type="submit"
-            className="w-full p-4 bg-red-500 hover:bg-red-600 rounded-lg text-white font-bold text-lg shadow-lg transform transition duration-300 hover:scale-105"
+            className={!registered ? "w-full p-4 bg-red-500 hover:bg-red-600 rounded-lg text-white font-bold text-lg shadow-lg transform transition duration-300 hover:scale-105" : "w-full p-4 bg-gray-500 rounded-lg text-white font-bold text-lg shadow-lg transform"}
+            disabled={loading || registered}
             onSubmit={handleSubmit}
           >
-            Register Now
+            {!registered ? "Register Now" : "Registered!"}
           </button>
-          <p className='text-center'>Kindly send your donation via Zelle to: sdkkm.pujo.houston@gmail.com</p>
+          {registered && !loading && <p className='text-center'>Kindly send your donation via Zelle to: sdkkm.pujo.houston@gmail.com</p>}
           <button
             className="w-full p-4 bg-red-500 hover:bg-red-600 rounded-lg text-white font-bold text-lg shadow-lg transform transition duration-300 hover:scale-105"
             onClick={() => { navigate("/") }}

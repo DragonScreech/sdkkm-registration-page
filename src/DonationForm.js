@@ -19,6 +19,7 @@ const DonationForm = () => {
 
   const [loading, setLoading] = useState(false);
   const [boxChecked, setBoxChecked] = useState(false);
+  const [donated, setDonated] = useState(false);
 
   const navigate = useNavigate();
 
@@ -48,8 +49,9 @@ const DonationForm = () => {
     const encoded = btoa(JSON.stringify(payload));
     const zelleLink = `https://enroll.zellepay.com/qr-codes?data=${encoded}`;
 
-    window.open(zelleLink, "_blank");
+    // window.open(zelleLink, "_blank");
     setLoading(false);
+    setDonated(true);
   };
 
   const handleChange = (e) => {
@@ -106,11 +108,13 @@ const DonationForm = () => {
           </div>
           <button
             type="submit"
-            className="w-full p-4 bg-red-500 hover:bg-red-600 rounded-lg text-white font-bold text-lg shadow-lg transform transition duration-300 hover:scale-105"
+            className={!donated ? "w-full p-4 bg-red-500 hover:bg-red-600 rounded-lg text-white font-bold text-lg shadow-lg transform transition duration-300 hover:scale-105" : "w-full p-4 bg-gray-500 rounded-lg text-white font-bold text-lg shadow-lg transform transition duration-300 hover:scale-105"}
+            disabled={loading || donated}
             onSubmit={handleSubmit}
           >
-            Sponsor Using Zelle
+            {!donated ? "Sponsor Using Zelle" : "Thank You For Your Donation!"}
           </button>
+          {donated && !loading && <p className='text-center'>Kindly send your donation via Zelle to: sdkkm.pujo.houston@gmail.com</p>}
           <button
             className="w-full p-4 bg-red-500 hover:bg-red-600 rounded-lg text-white font-bold text-lg shadow-lg transform transition duration-300 hover:scale-105"
             onClick={() => { navigate("/donations") }}

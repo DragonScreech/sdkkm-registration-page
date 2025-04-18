@@ -42,6 +42,12 @@ export default function RegistrationPage() {
             Donate Now
           </button>
         </div>
+        <button
+          className="w-full p-4 bg-red-500 hover:bg-red-600 rounded-lg text-white font-bold text-lg shadow-lg transform transition duration-300 hover:scale-105"
+          onClick={() => { navigate("/report") }}
+        >
+          Admin Dashboard
+        </button>
       </div>
     </div>
   );
