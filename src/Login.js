@@ -12,8 +12,8 @@ const SimpleLogin = () => {
     e.preventDefault();
 
     // 🔐 Replace with your desired credentials
-    const correctUsername = "admin";
-    const correctPassword = "puja2025";
+    const correctUsername = process.env.REACT_APP_ADMIN_USERNAME || "admin";
+    const correctPassword = process.env.REACT_APP_ADMIN_PASSWORD || "admin123";
 
     if (username === correctUsername && password === correctPassword) {
       localStorage.setItem("isLoggedIn", "true");
