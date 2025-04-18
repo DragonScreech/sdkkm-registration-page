@@ -8,6 +8,9 @@ import Register from './Register';
 import Donations from './Donations';
 import RegistrationPage from './RegistrationCards';
 import DonationForm from './DonationForm';
+import Report from './Report';
+import ProtectedRoute from './ProtectedRoute';
+import SimpleLogin from './Login';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -19,6 +22,15 @@ root.render(
         <Route path="/register" element={<Register />} />
         <Route path="/donations" element={<Donations />} />
         <Route path="/donationForm" element={<DonationForm></DonationForm>} />
+        <Route path="/login" element={<SimpleLogin />} />
+        <Route
+          path="/report"
+          element={
+            <ProtectedRoute>
+              <Report />
+            </ProtectedRoute>
+          }
+        />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>

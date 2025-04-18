@@ -36,7 +36,7 @@ const DonationForm = () => {
     const price = selectedDonation.price;
     const donationString = selectedDonation.name;
 
-    await setDoc(doc(db, "donations", formData.name), { formData, paid: false, donationAmount: price, donationName: donationString });
+    await setDoc(doc(db, "donations", formData.name), { formData, paid: false, donationAmount: price, donationName: donationString, date: new Date() });
 
     const payload = {
       name: "SDKKM Puja Registration",
